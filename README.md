@@ -5,6 +5,8 @@ An entry for the Ludum Dare miniLD#40
 
 Play it [here](http://obiot.github.io/meteoR/)
 
+Ludum Dare entry [page] (http://www.ludumdare.com/compo/minild-40/?action=preview&uid=13661)
+
 Save the earth ! Touch the ship to move it around the screen 
 (to make sure you don't miss your target, or to avoid being crushed by meteors), 
 and touch to aim at meteors to destroy them before they reach the earth ! 
