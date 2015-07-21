@@ -2,20 +2,6 @@
  * main 
  */
 var game = {
-
-	// game assets
-	assets : [	
-		{name: "meteorbig",			type:"image",	src: "media/meteorbig.png"},
-		{name: "meteorsmall",		type:"image",	src: "media/meteorsmall.png"},
-		{name: "shieldbig",			type:"image",	src: "media/shieldbig.png"},
-		{name: "shieldsmall",		type:"image",	src: "media/shieldsmall.png"},
-		{name: "plasma",			type:"image",	src: "media/plasma.png"},
-		{name: "earth",				type:"image",	src: "media/earth.png"},
-		{name: "planet_glass",		type:"image",	src: "media/planet_glass.png"},
-		{name: "ship",				type:"image",	src: "media/ship.png"},
-		{name: "laser",				type:"image",	src: "media/laser.png"},
-		{name: "font",				type:"image",	src: "media/font.png"}
-	],
 	
 	earthCenter : null,
 	
@@ -67,7 +53,7 @@ var game = {
 		me.loader.onload = this.loaded.bind(this);
 		
 		// set all ressources to be loaded
-		me.loader.preload(game.assets);
+		me.loader.preload(game.resources);
 		
 		// load everything & display a loading screen
 		me.state.change(me.state.LOADING);

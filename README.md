@@ -1,21 +1,63 @@
-meteoR
-======
+melonJS boilerplate
+-------------------------------------------------------------------------------
 
-An entry for the Ludum Dare miniLD#40
+features :
+- video autoscaling
+- mobile optimized HTML/CSS
+- swiping disabled on iOS devices
+- debug Panel (if #debug)
+- default icons
+- distribution build
+- standalone build for desktop operating systems
 
-Play it [here](http://obiot.github.io/meteoR/)
+## To run distribution
 
-Ludum Dare entry [page] (http://www.ludumdare.com/compo/minild-40/?action=preview&uid=13661)
+To build, be sure you have [node](http://nodejs.org) installed. Clone the project:
 
-Save the earth ! Touch the ship to move it around the screen 
-(to make sure you don't miss your target, or to avoid being crushed by meteors), 
-and touch to aim at meteors to destroy them before they reach the earth ! 
+    git clone https://github.com/melonjs/boilerplate.git
 
-The game is not finished, and is at least missing a proper enemies wave management, 
-something to display the current earth (life) status, sfx and music.
+Then in the cloned directory, simply run:
 
-the game is kind of optimized for the ipad (add it to home screen before using it), 
-in terms of display size but as well since using multitouch is better when playing 
-(as then you can both move the ship and shoot at the same time!)
+    npm install
 
-![ScreenShot](http://obiot.github.io/meteoR/public/screenshot.png)
+You must also have `grunt-cli` installed globally:
+
+    npm install -g grunt-cli
+
+Running the game:
+
+	grunt serve
+
+And you will have the boilerplate example running on http://localhost:8000
+
+## Building Release Versions
+
+To build:
+
+    grunt
+
+This will create a `build` directory containing the files that can be uploaded to a server, or packaged into a mobile app.
+
+----
+
+Building a standalone desktop release:
+
+    grunt dist
+
+Running the desktop release on Windows:
+
+    .\bin\electron.exe
+
+Running the desktop release on Mac OS X:
+
+    open ./bin/Electron.app
+
+Running the desktop release on Linux:
+
+    ./bin/electon
+
+Note that you may have to edit the file `Gruntfile.js` if you need to better dictate the order your files load in. Note how by default the game.js and resources.js are specified in a specific order.
+
+-------------------------------------------------------------------------------
+Copyright (C) 2011 - 2015 Olivier Biot, Jason Oster, Aaron McLeod
+melonJS is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php)
