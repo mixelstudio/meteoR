@@ -1,7 +1,7 @@
 /**
  * a score entity
  */
-EntityScore  = me.InvisibleEntity.extend({
+game.EntityScore  = me.Entity.extend({
 	init: function(x, y, z) {
 		settings = {
 			width : 0,

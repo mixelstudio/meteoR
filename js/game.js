@@ -5,6 +5,8 @@ var game = {
     // an object where to store game information
     data : {
 
+        earth : null,
+
         earthCenter : null,
         // score
         score : 0
@@ -47,27 +49,29 @@ var game = {
     "loaded" : function () {
         // set the "Play/Ingame" Screen Object
         me.state.set(me.state.MENU, new game.TitleScreen());
-        me.state.set(me.state.PLAY, new game.PlayScreen());
-        me.state.set(me.state.GAMEOVER, new game.GameOverScreen());
+        //me.state.set(me.state.PLAY, new game.PlayScreen());
+        //me.state.set(me.state.GAMEOVER, new game.GameOverScreen());
 
         // add some fadeIn/fadeOut effect for transition 
         me.state.transition("fade","#000000", 100);
         
         // add our user-defined entities in the entity pool
         // and enable the object pooling mechanism
-        me.pool.register("meteor", game.EntityMeteor, true);
         me.pool.register("earth", game.EntityEarth, true);
-        me.pool.register("shield", me.SpriteObject, true);
-        me.pool.register("ship", game.EntityShip, true);
-        me.pool.register("laser", game.EntityLaser, true);
-        me.pool.register("plasma", game.EntityPlasma, true);
+        me.pool.register("meteor", game.EntityMeteor, true);
+        me.pool.register("shield", me.Sprite, true);
+        //me.pool.register("ship", game.EntityShip, true);
+        //me.pool.register("laser", game.EntityLaser, true);
+        //me.pool.register("plasma", game.EntityPlasma, true);
         
         // add a fn callback that displays "pause" on pause :)
         me.state.onPause = function () {
+            /*
             var _font = new me.Font('Arial', 32, 'white', 'center');
             _font.bold();
             _font.draw(me.video.getSystemContext(), 'Paused !', me.game.viewport.width/2, me.game.viewport.height/2);
             me.video.blitSurface();
+            */
         };
 
         // Start the game.

@@ -1,38 +1,44 @@
 /**
  * a earth entity
  */
-EntityEarth = me.Entity.extend({
-	init: function(x, y, z, big) {
+game.EntityEarth = me.Entity.extend({
+	init: function(x, y, big) {
 
 		settings = {
 			image : "earth",
-			spritewidth : 416,
-			spriteheight : 416
+			height : 416,
+			width : 416,
 		};
 		
-		this.parent(x, y, settings);
+		// call the constructor
+        this._super(me.Entity, 'init', [x, y, settings]);
 
-		this.z = z || 1;
+        // add the earth sprite as renderable
+        this.renderable = new me.Sprite(0, 0, {
+        	image: me.loader.getImage("earth"),			
+        	framewidth : 416,
+			frameheight : 416
+		});
 		
 		// set a reference under our namespace
-		game.earth = this;
-		this.center = new me.Vector2d(this.pos.x+(this.widht/2), this.pos.y+(this.height/2));
+		game.data.earth = this;
+
+		this.center = new me.Vector2d(this.pos.x+(this.width / 2), this.pos.y+(this.height / 2));
 		
 		// the white stuff in front of the meteor
 		// (did not find the right way to name it, but it's not a shield)
-		this.athmosphere = new me.SpriteObject(this.pos.x, this.pos.y, me.loader.getImage("planet_glass"));
+		this.athmosphere = new me.Sprite(this.pos.x, this.pos.y, {image: me.loader.getImage("planet_glass")});
 		// force this since it won' be updated by the engine
 		this.athmosphere.inViewport = true;
 		// set the shield initial position 
 		// update the shield position and angle
-		this.athmosphere.pos.x = this.pos.x + this.hWidth - this.athmosphere.hWidth;
-		this.athmosphere.pos.y = this.pos.y + this.hHeight - this.athmosphere.hHeight;
+		this.athmosphere.pos.x = this.pos.x + (this.width / 2) - (this.athmosphere.width / 2);
+		this.athmosphere.pos.y = this.pos.y + (this.height / 2) - (this.athmosphere.height / 2);
 		// make the shield mostly transparent
 		this.athmosphere.setOpacity(0.5);
 		
 		// planet initial life
 		this.life = 100;
-
 	},
 	
 	onTouch : function (big) {
@@ -44,14 +50,14 @@ EntityEarth = me.Entity.extend({
 		}
 	},
 
-	update: function() {
-		this.parent();
-		return this.athmosphere.update();
+	update: function(dt) {
+		this._super(me.Entity, 'update', [dt]);
+		return this.athmosphere.update(dt);
 	},
 	
-	draw : function (context) {
-		this.parent(context);
-		this.athmosphere.draw(context);
+	draw : function (renderer) {
+		this._super(me.Entity, 'draw', [renderer]); 
+		this.athmosphere.draw(renderer);
 	}
 
 });

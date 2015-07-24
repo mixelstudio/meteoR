@@ -6,62 +6,67 @@
 game.TitleScreen = me.ScreenObject.extend({
 
 	onResetEvent: function() {
+
 		
+		me.game.world.autoDepth = false;
+
 		// add the background color (#0)
-		me.game.add(new me.ColorLayer('background','#5E3F66',0));
+		me.game.world.addChild(new me.ColorLayer('background','#5E3F66'), 0);
 		
 		// add the earth ! (#1)
-		var height = me.game.viewport.height;
-		me.game.add(me.entityPool.newInstanceOf("earth", -120, height-296, 1, true));
+		me.game.world.addChild(me.pool.pull("earth", -120, me.game.viewport.height-296, true), 1);
 		
 		// add a big meteor in the center
 		var x = (me.game.viewport.width/2)-(136/2);
 		var y = (me.game.viewport.height/3)-(111/2);
-		var meteor = me.entityPool.newInstanceOf("meteor", x, y, 1, true);
+		var meteor = me.pool.pull("meteor", x, y, true);
 		meteor.alive = false;
 		meteor.angle = 0;
 		meteor.resize(3.0);
 		meteor.shield.resize(3.0);
-		me.game.add(meteor);		
+		console.log(meteor);
+		me.game.world.addChild(meteor, 2);
 		
-		// sort all objects
-		me.game.sort();
-		
-		
-		this.tfont = new me.BitmapFont("font", 32);
-		this.tfont.set('center', 0.5);
-		this.sfont = new me.BitmapFont("font", 32);
-		this.sfont.set('center', 1.0);
-		this.mfont = new me.BitmapFont("font", 32);
-		this.mfont.set('center', 1.5);
-		this.bfont = new me.BitmapFont("font", 32);
-		this.bfont.set('center', 2.5);
+		// renderable to display the game title
+        me.game.world.addChild(new (me.Renderable.extend({
+            init: function() {
+                this._super(me.Renderable, 'init', [0, 0, me.game.viewport.width, me.game.viewport.height]);
+				this.tfont = new me.BitmapFont("font", {x:32});
+				this.tfont.set('center', 0.5);
+				this.sfont = new me.BitmapFont("font", {x:32});
+				this.sfont.set('center', 1.0);
+				this.mfont = new me.BitmapFont("font", {x:32});
+				this.mfont.set('center', 1.5);
+				this.bfont = new me.BitmapFont("font", {x:32});
+				this.bfont.set('center', 2.5);
+            },
+            update: function() {
+                return true;
+            },
+            draw: function(renderer) {
+				this.mfont.draw (renderer, "METEO ", me.game.viewport.width/2, 250);
+				this.bfont.draw (renderer, "     R", (me.game.viewport.width/2) - 40, 230);
+				this.sfont.draw (renderer, "TAP TO PLAY", me.game.viewport.width/2, 500);
+
+				this.tfont.draw (renderer, "CREDITS:", me.game.viewport.width/2, 700);
+				this.tfont.draw (renderer, "MELONJS.ORG", me.game.viewport.width/2, 716);
+				this.tfont.draw (renderer, "KENNEY.NL", me.game.viewport.width/2, 732);
+            }
+        })), 3);
+
+		me.game.world.autoDepth = true;
 		
 		// tap to play
-		me.input.registerMouseEvent('mousedown', me.game.viewport, function() {
+		me.input.registerPointerEvent('pointerdown', me.game.viewport, function() {
 			 //switch to PLAY state
 			me.state.change(me.state.PLAY);
 		});
 
 	},
-	
-	update : function () {
-	},
-	
-	draw : function (context) {
-		this.mfont.draw (context, "METEO ", me.game.viewport.width/2, 250);
-		this.bfont.draw (context, "    R", (me.game.viewport.width/2)-24, 230);
-		this.sfont.draw (context, "TAP TO PLAY", me.game.viewport.width/2, 500);
-
-		this.tfont.draw (context, "CREDITS:", me.game.viewport.width/2, 700);
-		this.tfont.draw (context, "MELONJS.ORG", me.game.viewport.width/2, 716);
-		this.tfont.draw (context, "KENNEY.NL", me.game.viewport.width/2, 732)
-	},
 
 	
 	onDestroyEvent : function() {
-		this.tfont = this.sfont = this.mfont = this.bfont = null;
-		me.input.releaseMouseEvent('mousedown', me.game.viewport);
+		me.input.releasePointerEvent('pointerdown', me.game.viewport);
 
 	}
 
