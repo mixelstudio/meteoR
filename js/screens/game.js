@@ -3,7 +3,7 @@
  * Main Game Screen
  */
 
-var PlayScreen = me.ScreenObject.extend( {
+game.PlayScreen = me.ScreenObject.extend( {
 	onResetEvent: function() {
 	
 		// reset the score

@@ -19,11 +19,11 @@
 
         <!-- melonJS Library -->
         <!-- build:js js/app.min.js -->
-        <script type="text/javascript" src="./lib/melonJS-0.9.6.js"></script>
+        <script type="text/javascript" src="lib/melonJS.js"></script>
 	
 
         <!-- Plugin(s) -->
-        <script type="text/javascript" src="./lib/debug/debugPanel.js"></script>
+        <script type="text/javascript" src="lib/debug/debugPanel.js"></script>
 
         <!-- Game Scripts -->
         <script type="text/javascript" src="js/game.js"></script>
@@ -46,7 +46,6 @@
             window.onReady(function onReady() {
                 game.onload();
 
-                /*  --- not in melonjs 0.9.6 ---
                 // Mobile browser hacks
                 if (me.device.isMobile && !navigator.isCocoonJS) {
                     // Prevent the webview from moving on a swipe
@@ -66,7 +65,6 @@
                         window.scrollTo(0, 1);
                     });
                 }
-               */
             });
         </script>
     </body>

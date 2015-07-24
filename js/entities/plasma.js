@@ -1,7 +1,7 @@
 /**
  * a plasma explosion effect
  */
-EntityPlasma = me.SpriteObject.extend({
+game.EntityPlasma = me.Sprite.extend({
 	init: function(x, y, z, big, callback) {
 		// call parent constructor
 		this.parent(x, y, me.loader.getImage("plasma"));

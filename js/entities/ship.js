@@ -1,7 +1,7 @@
 /**
  * a earth entity
  */
-EntityShip = me.ObjectEntity.extend({
+game.EntityShip = me.Entity.extend({
 	init: function(x, y, z) {
 		settings = {
 			image : "ship",

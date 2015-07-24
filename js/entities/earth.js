@@ -1,7 +1,7 @@
 /**
  * a earth entity
  */
-EntityEarth = me.ObjectEntity.extend({
+EntityEarth = me.Entity.extend({
 	init: function(x, y, z, big) {
 
 		settings = {

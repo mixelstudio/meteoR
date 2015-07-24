@@ -1,13 +1,8 @@
 
 /** 
- * Title Screen
+ * Game End Screen
  */
-var GameEndScreen = me.ScreenObject.extend( {
-	init : function() {
-		this.parent(true);
-		this.font = null;
-		this.instructions = 'you are the master !';
-	},
+game.GameEndScreen = me.ScreenObject.extend( {
 	
 	onResetEvent: function() {	
 		// load the title screen
@@ -20,6 +15,8 @@ var GameEndScreen = me.ScreenObject.extend( {
 		this.font = new me.Font('Arial', 20, 'black', 'center');
 		// automatically switch back to Menu screen after 2sec
 		this.timeoutID = setTimeout(function(){me.state.change(me.state.MENU)},2000);
+
+		this.instructions = 'you are the master !';
 	},
 	
 	update : function() {

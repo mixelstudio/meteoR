@@ -1,14 +1,9 @@
 
 /** 
- * Main Game Screen
+ * Game Over Screen
  */
 
-var GameOverScreen = me.ScreenObject.extend({
-	init: function(){
-		this.parent(true);
-		this.mfont = null;
-		this.bfont = null;
-	},
+game.GameOverScreen = me.ScreenObject.extend({
 
 	onResetEvent: function() {
 		

@@ -1,15 +1,9 @@
 
 /** 
- * Main Game Screen
+ * Title Screen
  */
 
-var TitleScreen = me.ScreenObject.extend({
-	init: function(){
-		this.parent(true);
-		this.sfont = null;
-		this.mfont = null;
-		this.bfont = null;
-	},
+game.TitleScreen = me.ScreenObject.extend({
 
 	onResetEvent: function() {
 		

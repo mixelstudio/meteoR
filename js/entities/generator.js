@@ -1,7 +1,7 @@
 /**
  * a meteor entity generator
  */
-EntityGenerator = me.InvisibleEntity.extend({
+game.EntityGenerator = me.InvisibleEntity.extend({
 	init: function(z) {
 		settings = {
 			width : 0,

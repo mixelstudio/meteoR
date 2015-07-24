@@ -1,7 +1,7 @@
 /**
  * a laser entity
  */
-EntityLaser = me.ObjectEntity.extend({
+game.EntityLaser = me.Entity.extend({
 	init: function(x, y, z, target) {
 		settings = {
 			image : "laser",
