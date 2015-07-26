@@ -44,15 +44,16 @@ game.EntityMeteor = me.Entity.extend({
 		
 		// the white stuff in front of the meteor
 		// (did not find the right way to name it, but it's not a shield)
-		this.shield = me.pool.pull("shield", this.pos.x, this.pos.y, {image:me.loader.getImage(big?"shieldbig":"shieldsmall")});
+		this.shield = me.pool.pull("shield", 0, 0, {image:me.loader.getImage(big?"shieldbig":"shieldsmall")});
 		// force this since it won' be updated by the engine
 		this.shield.inViewport = true;
 		// adjust the shield to face earth
 		this.shield.angle = ((this.angleToEarth.radToDeg())+90).degToRad();
+		
 		// set the shield initial position 
-		// update the shield position and angle
-		this.shield.pos.x = this.pos.x + (this.width / 2) - (this.shield.width / 2);
-		this.shield.pos.y = this.pos.y + (this.height / 2) - (this.shield.height / 2);
+		// adjust the shield position and angle
+		this.shield.pos.x = (this.width / 2) - (this.shield.width / 2);
+		this.shield.pos.y = (this.height / 2) - (this.shield.height / 2);
 		// make the shield mostly transparent
 		this.shield.setOpacity(0.2);
 		
@@ -96,10 +97,7 @@ game.EntityMeteor = me.Entity.extend({
 				this.onReachEarth.call(this);
 				return true;
 			}
-			
-			// update the shield position and angle
-			this.shield.pos.add(this.body.vel);
-			
+
 			// update sprite animation
 			this.shield.update(dt);
 			this._super(me.Entity, 'update', [dt]);
@@ -109,7 +107,9 @@ game.EntityMeteor = me.Entity.extend({
 	
 	draw: function(renderer) {
 		this._super(me.Entity, 'draw', [renderer]);
+		renderer.getContext().translate(this.pos.x, this.pos.y);
 		this.shield.draw(renderer);
+		renderer.getContext().translate(-this.pos.x, -this.pos.y);
 	},
 	
 	onDestroyEvent : function() {
