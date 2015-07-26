@@ -4,13 +4,11 @@
 game.EntityMeteor = me.Entity.extend({
 	init: function(x, y, big) {
 
-		settings = {
+		// call the constructor
+        this._super(me.Entity, 'init', [x, y, {
 			height : big?136:44,
 			width : big?111:42
-		};
-
-		// call the constructor
-        this._super(me.Entity, 'init', [x, y, settings]);
+		}]);
 
         // add the meteor sprite as renderable
         this.renderable = new me.Sprite(0, 0, {
@@ -70,10 +68,12 @@ game.EntityMeteor = me.Entity.extend({
 	},
 	
 	onTouch : function () {
-		// make the ship fire towards us
-		game.data.ship.fire(this);
-		// don't propagate the event furthermore
-		return false;
+		if (this.alive) {
+			// make the ship fire towards us
+			game.data.ship.fire(this);
+			// don't propagate the event furthermore
+			return false;
+		}
 	},
 	
 	onReachEarth : function () {

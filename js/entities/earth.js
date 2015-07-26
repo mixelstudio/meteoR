@@ -3,15 +3,12 @@
  */
 game.EntityEarth = me.Entity.extend({
 	init: function(x, y, big) {
-
-		settings = {
-			image : "earth",
-			height : 416,
-			width : 416,
-		};
 		
 		// call the constructor
-        this._super(me.Entity, 'init', [x, y, settings]);
+        this._super(me.Entity, 'init', [x, y, {
+			height : 416,
+			width : 416,
+		}]);
 
         // add the earth sprite as renderable
         this.renderable = new me.Sprite(0, 0, {

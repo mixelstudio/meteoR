@@ -3,13 +3,16 @@
  */
 game.EntityShip = me.Entity.extend({
 	init: function(x, y, z) {
-		settings = {
-			image : "ship",
-			spritewidth : 80,
-			spriteheight : 96
-		};
-		this.parent(x, y, settings);
-		this.z = z || 4;
+		
+		// call the constructor
+        this._super(me.Entity, 'init', [x, y, { width : 80, height : 96 }]);
+
+        // add the meteor sprite as renderable
+        this.renderable = new me.Sprite(0, 0, {
+        	image: me.loader.getImage("ship"),			
+        	framewidth : 80,
+			frameheight : 96
+		});
 				
 		this.canMove = false;
 		
@@ -20,21 +23,23 @@ game.EntityShip = me.Entity.extend({
 		this.touchId = -1;
 		
 		//register on mouse/touch event
-		me.input.registerMouseEvent('mousedown', this.collisionBox, this.onSelect.bind(this));
-		me.input.registerMouseEvent('mouseup', this.collisionBox, this.onRelease.bind(this));
+		me.input.registerPointerEvent('pointerdown', this, this.onSelect.bind(this));
+		me.input.registerPointerEvent('pointerup', this, this.onRelease.bind(this));
 
 		// set a reference under our namespace
-		game.ship = this;
+		game.data.ship = this;
 
 	},
 	
 	
 	getFingerId : function () {
+		/*
 		for(var i=0, l=me.input.touches.length; i<l; i++) {
 			if (this.collisionBox.containsPoint(me.input.touches[i])) {
 				return i;
 			}
 		}
+		*/
 		return -1;
 	},
 	
@@ -60,13 +65,13 @@ game.EntityShip = me.Entity.extend({
 		// make the ship face the meteor
 		this.angle = this.angleTo(meteor);
 		// add a new laser beam
-		me.game.add(me.entityPool.newInstanceOf("laser", this.pos.x+this.hWidth, this.pos.y+this.hHeight, 3, meteor));
-		me.game.sort();
+		me.game.world.addChild(me.pool.pull("laser", this.pos.x+this.hWidth, this.pos.y+this.hHeight, meteor), 3);
 	},
 
-	update: function() {
+	update: function(dt) {
 		
 		// check if we touch a meteor
+		/*
 		var res = me.game.collideType(this,'meteor');
 		if (res) {
 			// destroy the ship !
@@ -92,9 +97,9 @@ game.EntityShip = me.Entity.extend({
 			));
 			me.game.remove(res.obj);
 			me.game.remove(this);
-			me.game.sort();
 			return true;
 		}
+		*/
 
 		if (this.canMove) {
 			var finger = this.getFingerId();
@@ -104,12 +109,7 @@ game.EntityShip = me.Entity.extend({
 				this.pos.sub(this.grabOffset);
 			}
 		}
-		return this.parent() || this.canMove;
-	},
-	
-	draw : function (context) {
-		this.parent(context);
+		return this._super(me.Entity, 'update', [dt]) || this.canMove;
 	}
-
 });
 

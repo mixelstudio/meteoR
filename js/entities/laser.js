@@ -2,14 +2,17 @@
  * a laser entity
  */
 game.EntityLaser = me.Entity.extend({
-	init: function(x, y, z, target) {
-		settings = {
-			image : "laser",
-			spritewidth : 33,
-			spriteheight : 9
-		};
-		this.parent(x, y, settings);
-		this.z = z || 3;
+	init: function(x, y, target) {
+		
+		// call the constructor
+        this._super(me.Entity, 'init', [x, y, {width : 33, height : 9 }]);
+
+        // add the meteor sprite as renderable
+        this.renderable = new me.Sprite(0, 0, {
+        	image: me.loader.getImage("laser"),			
+        	framewidth : 33,
+			frameheight : 9
+		});
 		
 		// laser speed (6000!!!)
 		this.speed = Math.round(6000 / me.sys.fps);
@@ -36,12 +39,12 @@ game.EntityLaser = me.Entity.extend({
 				// check if we reach target
 				if (this.target.collisionBox.containsPoint(this.pos)) {
 					// add the plama explosion effect
-					me.game.add(me.entityPool.newInstanceOf(
+					me.game.world.addChild(me.entityPool.newInstanceOf(
 						"plasma", 
 						this.target.pos.x + this.target.hWidth,
 						this.target.pos.y + this.target.hHeight, 
-						this.target.z, 
-						this.target.big)
+						this.target.big),
+						this.target.z
 					);	
 					// add some score
 					game.score += (this.target.big?300:150);

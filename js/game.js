@@ -49,7 +49,7 @@ var game = {
     "loaded" : function () {
         // set the "Play/Ingame" Screen Object
         me.state.set(me.state.MENU, new game.TitleScreen());
-        //me.state.set(me.state.PLAY, new game.PlayScreen());
+        me.state.set(me.state.PLAY, new game.PlayScreen());
         //me.state.set(me.state.GAMEOVER, new game.GameOverScreen());
 
         // add some fadeIn/fadeOut effect for transition 
@@ -60,9 +60,9 @@ var game = {
         me.pool.register("earth", game.EntityEarth, true);
         me.pool.register("meteor", game.EntityMeteor, true);
         me.pool.register("shield", me.Sprite, true);
-        //me.pool.register("ship", game.EntityShip, true);
-        //me.pool.register("laser", game.EntityLaser, true);
-        //me.pool.register("plasma", game.EntityPlasma, true);
+        me.pool.register("ship", game.EntityShip, true);
+        me.pool.register("laser", game.EntityLaser, true);
+        me.pool.register("plasma", game.EntityPlasma, true);
         
         // add a fn callback that displays "pause" on pause :)
         me.state.onPause = function () {

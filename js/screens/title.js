@@ -7,9 +7,6 @@ game.TitleScreen = me.ScreenObject.extend({
 
 	onResetEvent: function() {
 
-		
-		me.game.world.autoDepth = false;
-
 		// add the background color (#0)
 		me.game.world.addChild(new me.ColorLayer('background','#5E3F66'), 0);
 		
@@ -53,8 +50,6 @@ game.TitleScreen = me.ScreenObject.extend({
 				this.tfont.draw (renderer, "KENNEY.NL", me.game.viewport.width/2, 732);
             }
         })), 3);
-
-		me.game.world.autoDepth = true;
 		
 		// tap to play
 		me.input.registerPointerEvent('pointerdown', me.game.viewport, function() {
