@@ -17,15 +17,16 @@ game.TitleScreen = me.ScreenObject.extend({
 		me.game.world.addChild(me.pool.pull("earth", -120, me.game.viewport.height-296, true), 1);
 		
 		// add a big meteor in the center
-		var x = (me.game.viewport.width/2)-(136/2);
-		var y = (me.game.viewport.height/3)-(111/2);
-		var meteor = me.pool.pull("meteor", x, y, true);
+		var meteor = me.pool.pull("meteor", 0, 0, true);
 		meteor.alive = false;
-		meteor.angle = 0;
-		meteor.resize(3.0);
-		meteor.shield.resize(3.0);
-		console.log(meteor);
-		me.game.world.addChild(meteor, 2);
+		meteor.renderable.scale(3.0);
+		meteor.shield.scale(3.0);
+		meteor.pos.set(
+				(me.game.viewport.width / 2) - (meteor.width / 2),
+				(me.game.viewport.height / 2) - (meteor.height / 2),
+				2
+		);
+		me.game.world.addChild(meteor);
 		
 		// renderable to display the game title
         me.game.world.addChild(new (me.Renderable.extend({
@@ -44,8 +45,7 @@ game.TitleScreen = me.ScreenObject.extend({
                 return true;
             },
             draw: function(renderer) {
-				this.mfont.draw (renderer, "METEO ", me.game.viewport.width/2, 250);
-				this.bfont.draw (renderer, "     R", (me.game.viewport.width/2) - 40, 230);
+				this.bfont.draw (renderer, "METEOR", (me.game.viewport.width/2), 320);
 				this.sfont.draw (renderer, "TAP TO PLAY", me.game.viewport.width/2, 500);
 
 				this.tfont.draw (renderer, "CREDITS:", me.game.viewport.width/2, 700);
