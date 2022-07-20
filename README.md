@@ -3,7 +3,7 @@ meteoR
 
 An entry for the Ludum Dare miniLD#40
 
-Play it [here](http://obiot.github.io/meteoR/)
+Play it [here](http://mixelstudio.github.io/meteoR/)
 
 Ludum Dare entry [page] (http://www.ludumdare.com/compo/minild-40/?action=preview&uid=13661)
 
